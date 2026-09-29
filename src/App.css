@@ -1,38 +1,269 @@
+:root {
+  --bg: #f4f6fb;
+  --card: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --income: #16a34a;
+  --outcome: #dc2626;
+  --balance: #2563eb;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
 .App {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
+.App h1 {
+  text-align: center;
+  margin: 0 0 24px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 20px;
+}
+
+/* Summary cards */
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.summary-card {
+  border-top: 4px solid var(--accent);
+}
+
+.summary-card h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.summary-card .amount {
+  margin: 8px 0 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.income { --accent: var(--income); }
+.outcome { --accent: var(--outcome); }
+.balance { --accent: var(--balance); }
+.balance.negative { --accent: var(--outcome); }
+
+/* Income (left) / Outcome (right) panels */
+.panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.panel h2 {
+  margin: 0 0 16px;
+  font-size: 20px;
+  color: var(--accent);
+}
+
+.entry-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.entry-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.entry-form input[type='text'] {
+  flex: 1 1 100%;
+}
+
+.entry-form input[type='number'],
+.entry-form input[type='date'] {
+  flex: 1 1 120px;
+}
+
+.entry-form button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.entry-form button:hover {
+  opacity: 0.9;
+}
+
+.entry-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.entry-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.entry-list li:last-child {
+  border-bottom: none;
+}
+
+.entry-desc {
+  display: block;
+  font-weight: 500;
+}
+
+.entry-date {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.entry-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.entry-amount {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.delete-btn {
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.delete-btn:hover {
+  color: var(--outcome);
+}
+
+.empty {
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+  margin: 16px 0;
+}
+
+/* Month navigation */
+.month-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.month-nav button {
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.month-nav button:hover {
+  background: var(--bg);
+}
+
+.month-label {
+  font-size: 20px;
+  font-weight: 600;
+  min-width: 180px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Monthly summary table */
+.monthly {
+  margin-top: 24px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.monthly h2 {
+  margin: 0 0 16px;
+  font-size: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.table-wrap {
+  overflow-x: auto;
 }
 
-.App-link {
-  color: #61dafb;
+.monthly table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.monthly th,
+.monthly td {
+  padding: 10px 12px;
+  text-align: right;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.monthly th:first-child,
+.monthly td:first-child {
+  text-align: left;
+}
+
+.monthly th {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.monthly tbody tr {
+  cursor: pointer;
+}
+
+.monthly tbody tr:hover {
+  background: var(--bg);
+}
+
+.monthly tbody tr.selected {
+  background: #eef2ff;
+  font-weight: 600;
+}
+
+.income-text { color: var(--income); }
+.outcome-text { color: var(--outcome); }
+.balance-text { color: var(--balance); }
+
+@media (max-width: 700px) {
+  .summary,
+  .panels {
+    grid-template-columns: 1fr;
   }
 }

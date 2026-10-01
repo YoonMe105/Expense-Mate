@@ -66,7 +66,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Money Tracker</h1>
+      <h1>Expense Mate</h1>
 
       <div className="month-nav">
         <button
